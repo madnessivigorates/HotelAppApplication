@@ -6,8 +6,9 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface ServiceMapper {
-    @Mapping(source = "guest.idGuest", target = "idGuest")
-    ServiceDto toDTO(Service service);
+    @Mapping(source = "guest.id", target = "idGuest")
+    @Mapping(source = "id", target = "idService")
+    ServiceDto toDto(Service service);
 
     Service toEntity(ServiceDto serviceDto);
 }

@@ -1,11 +1,9 @@
 package com.Senla.Mathew.HotelApp.Models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
-import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -16,7 +14,7 @@ public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idGuest")
-    private Long idGuest;
+    private Long id;
 
     @Column(name = "name", nullable = false, length = 25)
     private String name;
@@ -41,7 +39,7 @@ public class Guest {
     private Room room ;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "guest", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Service> servicesList;
+    private List<Service> servicesList = new ArrayList<>();
 
 
     public Guest() {
@@ -86,7 +84,7 @@ public class Guest {
     }
 
     public Long getIdRoom() {
-        return room.getIdRoom();
+        return room.getId();
     }
 
     public List<Service> getServicesList() {
@@ -101,8 +99,8 @@ public class Guest {
         this.name = name;
     }
 
-    public void setIdGuest(Long idGuest) {
-        this.idGuest = idGuest;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setSurname(String surname) {
@@ -137,8 +135,8 @@ public class Guest {
         return checkInDate;
     }
 
-    public Long getIdGuest() {
-        return idGuest;
+    public Long getId() {
+        return id;
     }
 
     public LocalDate getCheckOutDate() {
@@ -172,7 +170,7 @@ public class Guest {
 
     @Override
     public String toString() {
-        return "GuestID: " + idGuest +
+        return "GuestID: " + id +
                 " Имя: " + name +
                 " Фамилия: " + surname +
                 " Возраст: " + age +

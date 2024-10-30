@@ -7,6 +7,6 @@ import java.util.Comparator;
 
 public class RoomCategoryComparator implements Comparator<RoomDto> {
     public int compare(RoomDto rm1, RoomDto rm2) {
-        return CharSequence.compare(rm1.getCategory(), rm2.getCategory());
+        return CharSequence.compare(rm1.category(), rm2.category());
     }
 }

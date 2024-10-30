@@ -1,7 +1,6 @@
 package com.Senla.Mathew.HotelApp.ModelsServices;
 
 import com.Senla.Mathew.HotelApp.Comparators.*;
-import com.Senla.Mathew.HotelApp.DTO.Guest.GuestDto;
 import com.Senla.Mathew.HotelApp.DTO.GuestHistory.GuestHistoryDto;
 import com.Senla.Mathew.HotelApp.DTO.GuestHistory.GuestHistoryMapper;
 import com.Senla.Mathew.HotelApp.DTO.Room.RoomDto;
@@ -13,7 +12,6 @@ import com.Senla.Mathew.HotelApp.Models.Room;
 import com.Senla.Mathew.HotelApp.ModelsRepositories.GuestHistoryRepository;
 import com.Senla.Mathew.HotelApp.ModelsRepositories.GuestRepository;
 import com.Senla.Mathew.HotelApp.ModelsRepositories.RoomRepository;
-import com.Senla.Mathew.HotelApp.ModelsServices.Interfaces.RoomService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-public class RoomServiceImpl implements RoomService {
+public class RoomServiceImpl {
 
     private final RoomRepository roomRepository;
     private final GuestRepository guestRepository;
@@ -44,21 +42,21 @@ public class RoomServiceImpl implements RoomService {
     }
 
     public List<RoomDto> showFreeRooms(String sortBy) {
-        List<RoomDto> roomDtos = roomMaper.toDTOList(roomRepository.findFreeRooms());
+        List<RoomDto> roomDtos = roomMaper.toDtoList(roomRepository.findFreeRooms());
         return sortedList(roomDtos,sortBy);
     }
 
     public List<RoomDto> showAllRooms(String sortBy) {
-        List<RoomDto> roomDtos = roomMaper.toDTOList(roomRepository.findAll());
+        List<RoomDto> roomDtos = roomMaper.toDtoList(roomRepository.findAll());
         return sortedList(roomDtos,sortBy);
     }
 
     public List<RoomDto> showRoomsForDate(LocalDate lookingDate) {
-        return roomMaper.toDTOList(roomRepository.findRoomsByAvailableDate(lookingDate));
+        return roomMaper.toDtoList(roomRepository.findRoomsByAvailableDate(lookingDate));
     }
 
     public List<GuestHistoryDto> getHistoryOfLivers(Long idRoom) {
-        return guestHistoryMapper.toDTOList(guestHistoryRepository.historyOfLivers(idRoom));
+        return guestHistoryMapper.toDtoList(guestHistoryRepository.historyOfLivers(idRoom));
     }
 
     public RoomDto getRoom(Long idRoom){

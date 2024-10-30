@@ -7,6 +7,6 @@ import java.util.Comparator;
 
 public class RoomRankComparator implements Comparator<RoomDto> {
     public int compare(RoomDto rm1, RoomDto rm2) {
-        return Double.compare(rm1.getRating(), rm2.getRating());
+        return Double.compare(rm1.rating(), rm2.rating());
     }
 }

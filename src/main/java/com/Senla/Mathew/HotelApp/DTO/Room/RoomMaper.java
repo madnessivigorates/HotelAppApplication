@@ -9,10 +9,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", uses = {GuestMapper.class})
 public interface RoomMaper {
+    @Mapping(source = "id",target = "idRoom")
     @Mapping(source = "listOfGuests",target = "guestsDtoList")
     RoomDto toDto(Room room);
 
     Room toEntity(RoomDto roomDto);
 
-    List<RoomDto> toDTOList(List<Room> guests);
+    List<RoomDto> toDtoList(List<Room> guests);
 }

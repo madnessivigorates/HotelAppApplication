@@ -8,6 +8,6 @@ import java.util.Comparator;
 
 public class RoomPriceComparator implements Comparator<RoomDto> {
     public int compare(RoomDto rm1, RoomDto rm2) {
-        return Double.compare(rm1.getRoomCost(), rm2.getRoomCost());
+        return Double.compare(rm1.roomCost(), rm2.roomCost());
     }
 }

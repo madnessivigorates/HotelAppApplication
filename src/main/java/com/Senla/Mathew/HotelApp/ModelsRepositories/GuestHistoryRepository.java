@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface GuestHistoryRepository extends JpaRepository<GuestHistory, Integer> {
 
-    @Query("FROM GuestHistory WHERE idRoom = :idRoom ORDER BY checkOutDate")
+    @Query("FROM GuestHistory gh WHERE gh.room.id = :idRoom ORDER BY checkOutDate")
     List<GuestHistory> historyOfLivers(@Param("idRoom") Long idRoom);
 }

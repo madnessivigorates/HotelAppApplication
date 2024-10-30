@@ -11,7 +11,8 @@ public class Service {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idService;
+    @Column(name = "idService")
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -39,12 +40,12 @@ public class Service {
         this.guest = guest;
     }
 
-    public void setIdService(Long idService) {
-        this.idService = idService;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getIdService() {
-        return idService;
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -64,7 +65,7 @@ public class Service {
     }
 
     public Long getGuestId(){
-        return guest.getIdGuest();
+        return guest.getId();
     }
 
     public void successfullyAdded() {

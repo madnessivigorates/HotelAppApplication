@@ -3,18 +3,19 @@ package com.Senla.Mathew.HotelApp.Models;
 import jakarta.persistence.*;
 
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "guesthistory", schema = "hotelsql")
+@Table(name = "guest_history", schema = "hotelsql")
 public class GuestHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idGuestHistory;
+    @Column(name = "idGuestHistory")
+    private Long id;
 
-    @Column(name = "idRoom")
-    private Long idRoom;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idRoom")
+    private Room room ;
 
     @Column(name = "name", nullable = false, length = 25)
     private String name;
@@ -39,23 +40,23 @@ public class GuestHistory {
         this.age = guest.getAge();
         this.checkInDate = guest.getCheckInDate();
         this.checkOutDate = guest.getCheckOutDate();
-        this.idRoom = guest.getRoom() != null ? guest.getRoom().getIdRoom() : 0;
+        this.room = guest.getRoom() != null ? guest.getRoom() : null;
     }
 
-    public Long getIdGuestHistory() {
-        return idGuestHistory;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdGuestHistory(Long idGuestHistory) {
-        this.idGuestHistory = idGuestHistory;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getIdRoom() {
-        return idRoom;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setIdRoom(Long idRoom) {
-        this.idRoom = idRoom;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public String getName() {
@@ -98,15 +99,4 @@ public class GuestHistory {
         this.checkOutDate = checkOutDate;
     }
 
-    @Override
-    public String toString() {
-        return "GuestHistory{" +
-                ", idRoom=" + idRoom +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", age=" + age +
-                ", checkInDate=" + checkInDate +
-                ", checkOutDate=" + checkOutDate +
-                '}';
-    }
 }

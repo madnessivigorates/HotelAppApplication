@@ -10,7 +10,6 @@ import com.Senla.Mathew.HotelApp.Models.Guest;
 import com.Senla.Mathew.HotelApp.Models.Service;
 import com.Senla.Mathew.HotelApp.ModelsRepositories.GuestRepository;
 import com.Senla.Mathew.HotelApp.ModelsRepositories.ServiceRepository;
-import com.Senla.Mathew.HotelApp.ModelsServices.Interfaces.GuestService;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 @org.springframework.stereotype.Service
-public class GuestServiceImpl implements GuestService {
+public class GuestServiceImpl {
 
     private final GuestRepository guestRepository;
     private final ServiceRepository serviceRepository;
@@ -37,7 +36,7 @@ public class GuestServiceImpl implements GuestService {
 
     public GuestDto getGuest(Long guestId){
         Guest guest = guestRepository.getById(guestId);
-        GuestDto guestDto = guestMapper.toDTO(guest);
+        GuestDto guestDto = guestMapper.toDto(guest);
         return guestDto;
     }
 
@@ -50,12 +49,12 @@ public class GuestServiceImpl implements GuestService {
     }
 
     public List<GuestDto> showGuests(String sortBy) {
-        List<GuestDto> guestDtos = guestMapper.toDTOList(guestRepository.findAll());
+        List<GuestDto> guestDtos = guestMapper.toDtoList(guestRepository.findAll());
         return sortedList(guestDtos, sortBy);
     }
 
     public List<GuestDto> showUninhabitedGuests(String sortBy) {
-        List<GuestDto> guestDtos = guestMapper.toDTOList(guestRepository.findUninhabitedGuests());
+        List<GuestDto> guestDtos = guestMapper.toDtoList(guestRepository.findUninhabitedGuests());
         return sortedList(guestDtos,sortBy);
     }
 

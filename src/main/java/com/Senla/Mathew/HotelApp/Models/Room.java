@@ -3,7 +3,6 @@ package com.Senla.Mathew.HotelApp.Models;
 
 import com.Senla.Mathew.HotelApp.Enum.Status;
 import jakarta.persistence.*;
-import com.Senla.Mathew.HotelApp.Enum.Status;
 
 
 import java.sql.*;
@@ -16,7 +15,8 @@ public class Room {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idRoom;
+    @Column(name = "idRoom")
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -121,8 +121,8 @@ public class Room {
         this.listOfGuests = listOfGuests;
     }
 
-    public void setIdRoom(Long idRoom) {
-        this.idRoom = idRoom;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setRoomCost(int roomCost) {
@@ -149,8 +149,8 @@ public class Room {
         this.status = status;
     }
 
-    public Long getIdRoom() {
-        return idRoom;
+    public Long getId() {
+        return id;
     }
 
     public List<Guest> getListOfGuests() {
