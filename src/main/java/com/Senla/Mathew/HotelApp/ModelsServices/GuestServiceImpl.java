@@ -4,7 +4,6 @@ import com.Senla.Mathew.HotelApp.Comparators.GuestAlphabetComparator;
 import com.Senla.Mathew.HotelApp.Comparators.GuestCheckOutComparator;
 import com.Senla.Mathew.HotelApp.DTO.Guest.GuestDto;
 import com.Senla.Mathew.HotelApp.DTO.Guest.GuestMapper;
-import com.Senla.Mathew.HotelApp.DTO.Service.ServiceDto;
 import com.Senla.Mathew.HotelApp.DTO.Service.ServiceMapper;
 import com.Senla.Mathew.HotelApp.Models.Guest;
 import com.Senla.Mathew.HotelApp.Models.Service;
@@ -41,9 +40,8 @@ public class GuestServiceImpl {
     }
 
     @Transactional
-    public void createGuest(GuestDto guestDto) {
-        if (guestDto != null){
-            Guest guest = guestMapper.toEntity(guestDto);
+    public void createGuest(Guest guest) {
+        if (guest != null){
             guestRepository.save(guest);
         }
     }
@@ -59,9 +57,8 @@ public class GuestServiceImpl {
     }
 
     @Transactional
-    public void addService(ServiceDto serviceDto, Long guestId) {
+    public void addService(Service service, Long guestId) {
         Guest guest = guestRepository.getById(guestId);
-        Service service = serviceMapper.toEntity(serviceDto);
         service.setGuest(guest);
         serviceRepository.save(service);
     }

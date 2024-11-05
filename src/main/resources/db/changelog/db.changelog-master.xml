@@ -265,4 +265,102 @@
         </insert>
     </changeSet>
 
+    <changeSet id="9" author="Mathew">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="roles"/>
+            </not>
+        </preConditions>
+        <createTable tableName="roles">
+            <column name="roleId" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(45)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="roles" columnName="roleId" columnDataType="int"/>
+    </changeSet>
+
+    <changeSet id="10" author="Mathew">
+        <insert tableName="roles">
+            <column name="name" value="ROLE_USER"/>
+        </insert>
+
+        <insert tableName="roles">
+            <column name="name" value="ROLE_ADMIN"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="11" author="Mathew">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="users"/>
+            </not>
+        </preConditions>
+        <createTable tableName="users">
+            <column name="userId" type="int">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="username" type="varchar(45)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="password" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="users" columnName="userId" columnDataType="int"/>
+    </changeSet>
+
+    <changeSet id="12" author="Mathew">
+        <insert tableName="users">
+            <column name="username" value="user"/>
+            <column name="password" value="$2a$10$JV7H3x9yfrdf7x4O4cSM2egnCYYmrEBTu9I32A5KpRW1YIeUmtXgW"/>
+        </insert>
+
+        <insert tableName="users">
+            <column name="username" value="admin"/>
+            <column name="password" value="$2a$10$JV7H3x9yfrdf7x4O4cSM2egnCYYmrEBTu9I32A5KpRW1YIeUmtXgW"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="13" author="Mathew">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="users_roles"/>
+            </not>
+        </preConditions>
+        <createTable tableName="users_roles">
+            <column name="userId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="roleId" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="users_roles" columnNames="userId,roleId" constraintName="pk_users_roles"/>
+        <addForeignKeyConstraint baseTableName="users_roles"
+                                 baseColumnNames="userId"
+                                 referencedTableName="users"
+                                 referencedColumnNames="userId"
+                                 constraintName="fk_users_roles_users"/>
+        <addForeignKeyConstraint baseTableName="users_roles"
+                                 baseColumnNames="roleId"
+                                 referencedTableName="roles"
+                                 referencedColumnNames="roleId"
+                                 constraintName="fk_users_roles_roles"/>
+    </changeSet>
+
+    <changeSet id="14" author="Mathew">
+        <insert tableName="users_roles">
+            <column name="userId" value="1"/>
+            <column name="roleId" value="1"/>
+        </insert>
+
+        <insert tableName="users_roles">
+            <column name="userId" value="2"/>
+            <column name="roleId" value="2"/>
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>

@@ -39,7 +39,7 @@ public class Room {
     @Column(name = "willBeFree")
     private LocalDate willBeFree;
 
-    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Guest> listOfGuests = new ArrayList<>();
 
     public Room() {
@@ -85,7 +85,7 @@ public class Room {
             return this;
         }
 
-        public Room build() throws SQLException {
+        public Room build() {
             return new Room(this);
         }
     }
@@ -183,5 +183,20 @@ public class Room {
 
     public int getCapacity() {
         return capacity;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", status=" + status +
+                ", roomCost=" + roomCost +
+                ", roomNumber=" + roomNumber +
+                ", rating=" + rating +
+                ", capacity=" + capacity +
+                ", category='" + category + '\'' +
+                ", willBeFree=" + willBeFree +
+                ", listOfGuests=" + listOfGuests +
+                '}';
     }
 }
